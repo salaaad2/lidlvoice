@@ -11,7 +11,7 @@
 /* Logic                                                                       */
 /*******************************************************************************/
 import Login from "./lib/Login.svelte";
-import Messages from "./lib/Messages.svelte";
+import Generator from "./lib/Generator.svelte";
 import { currentUser } from "./lib/pocketbase";
 </script>
 
@@ -23,5 +23,5 @@ import { currentUser } from "./lib/pocketbase";
 <Login />
 
 {#if $currentUser}
-  <Messages />
+  <Generator />
 {/if}

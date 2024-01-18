@@ -25,6 +25,7 @@ yarn-error.log*
 LIDL_voice
 pb_data
 
-lidlVoice
-backend/resources
+lidlvoice
+backend/resources/*.mp3
+backend/resources/*.wav
 *.wav

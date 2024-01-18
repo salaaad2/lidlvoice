@@ -14,15 +14,16 @@ import { onMount, onDestroy } from 'svelte';
 import { currentUser, pb } from './pocketbase';
 
 let newMessage: string;
-let selectedFileName: string;
-let filename_list = [];
+let selectedVoice: string;
+let voice_list = [];
 let audioFileBlob;
 
 onMount(async () => {
-  const filenameList = pb.collection('users').getList(1, 200, {
+  const voiceList = pb.collection('voices').getList(1, 200, {
     sort: '-created'
   });
-  filename_list = (await filenameList).items;
+  voice_list = (await voiceList).items;
+  console.log(voice_list);
 });
 
 onDestroy(() => {
@@ -33,7 +34,7 @@ async function addAudioFile(){
 
 async function createRecording() {
   const formData = new URLSearchParams();
-  formData.append("filename", selectedFileName);
+  formData.append("voice", selectedVoice);
   formData.append("providedText", newMessage);
   //console.log(parameter_name + ": " + parameter_value);
 
@@ -57,22 +58,12 @@ async function createRecording() {
 /* Page Structure                                                              */
 /****************************************************************************--->
  
-<div class="messages">
-  {#each filename_list as filename (filename.id)}
-    <div class="msg">
-      <div>
-        <p class="msg-text"></p>
-      <img
-        class="avatar"
-        src={`https://avatars.dicebear.com/api/identicon/test.svg`}
-        alt="avatar"
-        width="40px"
-        />  
-      <b>@{filename}</b>
-      </div>
-    </div>
+<div class="available-voices">
+  <p class="msg-text"> Voix Disponibles : <br>
+  {#each voice_list as voice (voice.id)}
+      {voice.voice_name},   
   {/each}
-
+  </p>
 </div>
 
 <div class="mediaPlayer">
@@ -85,7 +76,12 @@ async function createRecording() {
 
 <div class="msg_submit">
 <form on:submit|preventDefault={createRecording}>
-  <textarea placeholder="Filename" type="text" bind:value={selectedFileName} />
+  <label for="dropdown"> Select a voice: </label>
+  <select id="dropdown" bind:value={selectedVoice}>
+  {#each voice_list as voice (voice.id)}
+  <option value={voice.voice_name}>{voice.voice_name}</option>
+  {/each}
+</select>
   <textarea placeholder="Message" type="text" bind:value={newMessage} />
   <button type="submit">></button>
 </form>

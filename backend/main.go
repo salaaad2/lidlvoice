@@ -49,7 +49,7 @@ func main() {
 			Method: http.MethodPost,
 			Path:   "/api/createRecording",
 			Handler: func(c echo.Context) error {
-				source_filename := c.FormValue("filename")
+				source_filename := c.FormValue("voice")
 				provided_text := c.FormValue("providedText")
 				fmt.Printf("source_filename: %v, provided_text: %v\n", source_filename, provided_text)
 
