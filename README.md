@@ -27,3 +27,19 @@ cd backend
 go build
 ./lidlvoice serve 
 ```
+
+Go to the Admin UI page displayed by the `./lidlvoice` command.
+
+move your .wav or .mp3 recordings to the `backend/resources/` folder.
+
+Create a collection named `voices`.
+
+Create rows in that collection, with two text columns: `voice_name` and `voice_path`
+
+example data:
+
+```
+# voices collection: 
+id | voice_name | voice_path
+<> | obama      | resources/obama-speech.mp3
+```
