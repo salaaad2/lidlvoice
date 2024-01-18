@@ -20,6 +20,8 @@ import { currentUser } from "./lib/pocketbase";
 /****************************************************************************--->
 <h1>LIDL_voice</h1>
 
+<p>xtts-license: <a href="https://coqui.ai/cpml">license</a></p>
+
 <Login />
 
 {#if $currentUser}
